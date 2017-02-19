@@ -1,0 +1,147 @@
+-- phpMyAdmin SQL Dump
+-- version 4.0.4
+-- http://www.phpmyadmin.net
+--
+-- Client: localhost
+-- Généré le: Sam 18 Février 2017 à 16:45
+-- Version du serveur: 5.6.12-log
+-- Version de PHP: 5.4.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Base de données: `ged`
+--
+CREATE DATABASE IF NOT EXISTS `ged` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `ged`;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ged_categories`
+--
+
+CREATE TABLE IF NOT EXISTS `ged_categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+
+--
+-- Contenu de la table `ged_categories`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ged_files`
+--
+
+CREATE TABLE IF NOT EXISTS `ged_files` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `nameView` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `url` varchar(255) NOT NULL,
+  `path` varchar(255) NOT NULL,
+  `category_id` int(11) NOT NULL DEFAULT '0',
+  `author` varchar(255) DEFAULT NULL,
+  `size` int(11) NOT NULL DEFAULT '0',
+  `description` text NOT NULL,
+  `keywords` text NOT NULL,
+  `version` varchar(255) NOT NULL,
+  `metaData` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=37 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ged_files_as_tags`
+--
+
+CREATE TABLE IF NOT EXISTS `ged_files_as_tags` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `file_id` int(11) NOT NULL,
+  `tag_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
+
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ged_informations`
+--
+
+CREATE TABLE IF NOT EXISTS `ged_informations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ged_name` varchar(255) NOT NULL,
+  `ged_coment` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Contenu de la table `ged_informations`
+--
+
+INSERT INTO `ged_informations` (`id`, `ged_name`, `ged_coment`) VALUES
+(1, 'GED', 'Nouvelle GED');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ged_tags`
+--
+
+CREATE TABLE IF NOT EXISTS `ged_tags` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+
+--
+-- Contenu de la table `ged_tags`
+--
+
+INSERT INTO `ged_tags` (`id`, `name`, `description`) VALUES
+(14, 'oscillant', '');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ged_trash`
+--
+
+CREATE TABLE IF NOT EXISTS `ged_trash` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `file_name` varchar(255) NOT NULL,
+  `data` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=34 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ged_users`
+--
+
+CREATE TABLE IF NOT EXISTS `ged_users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `login` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `username` varchar(60) NOT NULL,
+  `right_read` int(11) DEFAULT '0',
+  `right_up` int(11) NOT NULL DEFAULT '0',
+  `right_admin` int(11) NOT NULL DEFAULT '0',
+  `token` varchar(255) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+
+--
+-- Contenu de la table `ged_users`
+--
